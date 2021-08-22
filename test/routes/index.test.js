@@ -1,4 +1,4 @@
-import { expect, server, BASE_URL } from './setup';
+import { expect, server, BASE_URL } from '../setup';
 
 describe('Index page test', () => {
     it('gets base url', done => {
