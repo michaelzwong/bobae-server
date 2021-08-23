@@ -1,6 +1,6 @@
 import { expect, server, BASE_URL } from '../setup';
 
-describe('Index page test', () => {
+describe('Index route works', () => {
     it('gets base url', done => {
         server
             .get(`${BASE_URL}/`)
