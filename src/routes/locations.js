@@ -4,7 +4,7 @@ import { searchTotalLocationsQuery } from '../services/graphql/queries';
 
 const locationsRouter = express.Router();
 
-locationsRouter.get('/locations/total', async (req, res, next) => {
+locationsRouter.get('/', async (req, res, next) => {
     const { term, vicinity, limit, offset } = req.query;
     const variables = {
         term: term,
@@ -12,12 +12,13 @@ locationsRouter.get('/locations/total', async (req, res, next) => {
         limit: parseInt(limit),
         offset: parseInt(offset),
     };
+    console.log(req.query);
 
     try {
         const data = await yelpClient.request(searchTotalLocationsQuery, variables);
-        res.send(JSON.stringify(data));
+        res.status(200).json(data);
     } catch (err) {
-        res.status(500).send(err);
+        res.status(500).send(err.message);
     }
 });
 
