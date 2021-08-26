@@ -5,14 +5,20 @@ import { searchTotalLocationsQuery } from '../services/graphql/queries';
 const locationsRouter = express.Router();
 
 locationsRouter.get('/', async (req, res, next) => {
-    const { term, vicinity, limit, offset } = req.query;
+    const { term, vicinity, limit } = req.query;
+
+    if(!term) {
+        return res.status(500).send('Parameter \'term\' is missing');
+    }
+    if(!vicinity) {
+        return res.status(500).send('Parameter \'vicinity\' is missing');
+    }
+
     const variables = {
         term: term,
         location: vicinity,
-        limit: parseInt(limit),
-        offset: parseInt(offset),
+        limit: parseInt(limit) || 50
     };
-    console.log(req.query);
 
     try {
         const data = await yelpClient.request(searchTotalLocationsQuery, variables);
@@ -21,5 +27,7 @@ locationsRouter.get('/', async (req, res, next) => {
         res.status(500).send(err.message);
     }
 });
+
+locationsRouter.get('/')
 
 export default locationsRouter;
