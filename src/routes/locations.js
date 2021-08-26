@@ -17,7 +17,7 @@ locationsRouter.get('/', async (req, res, next) => {
     const variables = {
         term: term,
         location: vicinity,
-        limit: parseInt(limit) || 50
+        limit: limit && parseInt(limit) || 50
     };
 
     try {
