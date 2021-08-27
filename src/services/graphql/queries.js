@@ -8,4 +8,17 @@ const searchTotalLocationsQuery = `
     }
     `;
 
-export { searchTotalLocationsQuery };
+const searchTopTenQuery = `
+    query searchTopTen($latitude: Float, $longitude: Float, $radius: Float){
+        search(term: "boba", latitude: $latitude, longitude: $longitude, limit: 10, radius: $radius, sort_by: "rating") {
+            total
+            business {
+                name
+                rating
+                review_count
+            }
+        }
+    }
+`;
+
+export { searchTotalLocationsQuery, searchTopTenQuery };
