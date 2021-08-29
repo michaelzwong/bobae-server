@@ -28,6 +28,4 @@ locationsRouter.get('/', async (req, res, next) => {
     }
 });
 
-locationsRouter.get('/')
-
 export default locationsRouter;
